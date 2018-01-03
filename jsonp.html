@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input id="search" type="text">
+    <ul id="list">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+<script>
+
+    const showMsg = msg => {
+        msg.s.forEach((item,i)=>{
+            list.children[i].innerHTML = item;
+        })
+    };
+
+    class jsonpDemo {
+        constructor() {
+            this.search = search;
+            this.list = list;
+            this.body = document.body;
+            this.init();
+        };
+        init(){
+            this.watchInput();
+        };
+        watchInput() {
+            this.search.onkeyup = () => {
+                if(this.search.value.length == 0){
+                    Array.from(this.list.children).forEach((item)=>{
+                        item.innerHTML = '';
+                    })
+                    return;
+                }
+                const script = document.createElement('script');
+                script.src = "http://www.baidu.com/su?wd="+this.search.value+"&cb=showMsg";
+                this.body.appendChild(script);
+                this.body.removeChild(script);                
+            }
+        }
+    }
+
+    new jsonpDemo();
+
+</script>
+</html>
