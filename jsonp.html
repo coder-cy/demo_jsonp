@@ -21,12 +21,6 @@
 </body>
 <script>
 
-    const showMsg = msg => {
-        msg.s.forEach((item,i)=>{
-            list.children[i].innerHTML = item;
-        })
-    };
-
     class jsonpDemo {
         constructor() {
             this.search = search;
@@ -46,14 +40,19 @@
                     return;
                 }
                 const script = document.createElement('script');
-                script.src = "http://www.baidu.com/su?wd="+this.search.value+"&cb=showMsg";
+                script.src = "http://www.baidu.com/su?wd="+this.search.value+"&cb=jsonp.showMsg";
                 this.body.appendChild(script);
                 this.body.removeChild(script);                
             }
+        };
+        showMsg(msg) {
+            msg.s.forEach((item,i)=>{
+                this.list.children[i].innerHTML = item;
+            });
         }
     }
 
-    new jsonpDemo();
+    const jsonp = new jsonpDemo();
 
 </script>
 </html>
